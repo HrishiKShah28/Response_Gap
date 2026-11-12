@@ -72,15 +72,7 @@ Avaloka operates as a coordinated digital workforce of specialized data science 
 
 ---
 
-## Hackathon Deliverables
 
-As stipulated by Guruvai Sciences, this project delivers:
-1. **Public / Shareable Avaloka Report Link**: The live interactive analytical session and model artifact within the Avaloka cloud platform.
-2. **2-Minute Screen Recording**: High-impact demonstration of the real-world inquiry, Avaloka dataset profiling, agent code generation, model training, critical verification of an AI finding, and final takeaways (following `DEMO_SCRIPT.md`).
-3. **Evidence-Backed Final Analytical Report**: A publishable, peer-grade research document combining Avaloka's findings with rigorous independent validation.
-4. **Complete Reproducibility Package**: All sanitized data scripts, exact prompt trajectories, exported Python code snippets, and audit logs.
-
----
 
 ## Key Empirical Findings Summary
 
@@ -120,17 +112,4 @@ All figures are compiled in high-resolution in the [figures/](file:///c:/Users/H
 
 ---
 
-## Project Status
-
-- [x] Phase 0: Project Initiation, Documentation Review, and Architecture Planning
-- [x] Phase 1: Representative Data Acquisition & Schema Profiling ($N = 119,967$)
-- [x] Phase 2: Avaloka Ingestion, Auto-Profiling & Exploratory Analysis
-- [x] Phase 3: In-Depth Categorical, Agency & Geographic Investigations (Simpson's Paradox)
-- [x] Phase 4: Predictive Modeling with Avaloka Model Training Agent (MTA)
-- [x] Phase 5: Independent Verification, Code Auditing & Integrity Checks
-- [x] Phase 6: Final Analytical Report Compilation & Executive Artifact Creation
-- [ ] Phase 7: Demo Video Recording, Public Link Validation & Form Submission
-
-> [!NOTE]
-> All analytical code, data acquisition scripts, independent verification pipelines, and reports are fully implemented, verified, and reproduction-ready. Follow `DEMO_RECORDING_GUIDE.md` for screen recording and `SUBMISSION_CHECKLIST.md` for final form submission.
 
