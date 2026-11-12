@@ -86,13 +86,22 @@ As stipulated by Guruvai Sciences, this project delivers:
 
 | Operational Domain | Key Empirical Finding | Statistical Evidence |
 | :--- | :--- | :--- |
-| **Citywide Distribution** | Extreme right-skewness; mean overstates delay by 65x. | **Median: 0.20 days (4.9h)** vs. Mean: 13.10d. **17.56% > 7d**, **8.25% > 30d**. |
-| **Volume vs. Delay** | Volume does **not** cause turnaround delay. | **Spearman $r = -0.301$** ($p = 0.34$). NYPD handles 49.8% volume at 0.04d median. |
-| **Slowest Categories** | Forestry, health inspections, and tenant conditions lead backlogs. | New Tree Requests: **344.2d median**; Mobile Food Vendors: **178.2d**; Unsanitary Housing: **58.3% > 7d**. |
-| **Borough Equity** | **Simpson's Paradox**: Disparities driven by complaint mix, not bias. | Bronx aggregate delay (18.7%) driven by 35.7% HPD share. In Heat complaints, Bronx is fastest (**1.20d** vs 1.59d Manhattan). |
-| **Temporal Dynamics** | Counter-intuitive weekend effect: weekend submissions are faster. | Weekend delay rate **12.55%** vs Weekday **19.29%** ($OR = 0.600$), driven by rapid NYPD noise cases. |
-| **Predictive Modeling** | Champion Gradient Boosted Trees captures >85% of delayed cases at intake. | **ROC-AUC: 0.935**, **PR-AUC: 0.746**, **Recall: 85.4%**, **Accuracy: 86.4%** on out-of-time test cohort. |
-| **Censoring Bias Audit** | Completed-case metrics represent an optimistic lower bound. | Auxiliary audit of 2,131 open cases shows **100.0% open > 7 days** (mean age: 142.6d). |
+| **Citywide Distribution** | Extreme right-skewness; arithmetic mean overstates typical delay by **65x**. | **Median: 0.20 days (4.9h)** vs. Mean: 13.10d. **17.56% > 7d**, **8.25% > 30d**. |
+| **Volume vs. Delay** | Agency volume was **not significantly associated** with median resolution time. | **Spearman $r = -0.301$** ($p = 0.342$); Pearson on log volume $r = -0.376$. NYPD handles 49.8% volume at 0.04d median. |
+| **Slowest Categories** | Forestry, health inspections, and tenant conditions dominate backlogs. | New Tree Requests: **344.2d median**; Mobile Food Vendors: **178.2d**; Unsanitary Housing: **58.3% > 7d**. |
+| **Borough Equity** | **Simpson's Paradox & Case-Mix Confounding**: Disparities driven by complaint composition, not agency bias. | Multi-strata audit across 6 categories proves Bronx aggregate delay (18.7%) is driven by 35.7% HPD housing share. In Heat complaints alone, the Bronx is fastest (**1.20d** vs 1.58d Manhattan). In police enforcement, all boroughs achieve **0.00% delay**. |
+| **Temporal Dynamics** | Counter-intuitive weekend effect: weekend submissions exhibit lower delay rates. | Weekend delay rate **12.55%** vs Weekday **19.29%** ($OR = 0.600, p = 7.02 \times 10^{-165}$), driven by rapid NYPD quality-of-life cases swamping the queue. |
+| **Predictive Modeling** | Champion Gradient Boosted Trees captures >85% of delayed cases at intake with zero target leakage. | **ROC-AUC: 0.935**, **PR-AUC: 0.746**, **Recall: 85.4%**, **Accuracy: 86.4%** on out-of-time chronological test cohort ($N = 29,374$). |
+| **Censoring Bias Audit** | Completed-case metrics represent an optimistic lower bound on real civic latency. | Auxiliary audit of 2,131 open cases shows **100.0% open > 7 days** (mean age: 142.6d), an expected artifact of the 2024 cohort observation horizon. |
+
+---
+
+## Avaloka Multi-Agent Collaboration Artifacts
+
+To demonstrate full transparency and prove the platform's autonomous capabilities, the complete interaction lineage is version-controlled:
+- 🤖 **[SESSION_TRANSCRIPT.md](file:///c:/Users/Hrishi/Desktop/projects/Response%20Gap/avaloka_session/SESSION_TRANSCRIPT.md)**: Full conversational trace covering Planner, Coder, Validator, Execution, Visualization, and Model Training agents.
+- 💻 **[GENERATED_CODE_ARCHIVE.md](file:///c:/Users/Hrishi/Desktop/projects/Response%20Gap/avaloka_session/GENERATED_CODE_ARCHIVE.md)**: Raw Python scripts authored by Avaloka's Coder Agent extracted from the code drawer.
+- 🔬 **[AVALOKA_VS_INDEPENDENT_AUDIT.md](file:///c:/Users/Hrishi/Desktop/projects/Response%20Gap/avaloka_session/AVALOKA_VS_INDEPENDENT_AUDIT.md)**: Double-blind verification audit table comparing Avaloka cloud executions against local sandboxed scripts across 27 metrics.
 
 ---
 

@@ -52,13 +52,13 @@ https://github.com/HrishiKShah28/Response_Gap
 
 ### Field 6: Summary of Findings & Key Innovations
 ```text
-Using Avaloka's multi-agent intelligence platform, we conducted an empirical investigation into NYC 311 operational telemetry:
+Using Avaloka's multi-agent data intelligence platform, we conducted an empirical investigation into NYC 311 operational telemetry (117,836 valid completed records + 2,131 open cases from 2024):
 
-1. Operational Disparities: Resolution durations exhibit extreme positive skewness (median 2.8 days, mean 8.6 days). Over 19% of complaints exceed 7 days, and 4.2% exceed 30 days.
-2. Volume Does Not Drive Delay: NYPD processes the largest intake volume yet achieves the fastest median resolution, whereas HPD (Housing) and DOB (Buildings) face severe statutory backlogs. Complaint volume alone does not cause slow resolution (Spearman r = -0.18).
-3. Simpson's Paradox Confirmed: In aggregate, the Bronx exhibits higher delay rates than other boroughs. However, when controlling for complaint categories (isolating Heat/Hot Water complaints), borough disparities diminish substantially, proving that geographic gaps are driven by case-mix variation (higher concentration of complex housing disputes) rather than municipal dispatch bias.
-4. Intake-Time Predictive Modeling: Partnering with Avaloka's Model Training Agent (MTA), we trained a binary classifier (delayed > 7 days) on strictly intake-time features (agency, complaint type, descriptor, borough, timing) using an out-of-time chronological train/test split. The model achieves an ROC-AUC of 0.83 and captures >75% of delayed complaints (high recall), providing actionable early warning flags for municipal triage.
-5. Critical AI Verification: Every headline metric was cross-validated through independent sandboxed Python scripts, and right-censoring bias from unresolved open cases was explicitly quantified.
+1. Operational Disparities: Resolution durations exhibit extreme positive skewness (median 0.20 days / 4.9 hours vs. arithmetic mean 13.10 days). Over 17.5% of complaints exceed 7 days, and 8.25% exceed 30 days.
+2. Volume vs. Turnaround: Agency-level complaint volume was not significantly associated with median resolution time in this observational sample (Spearman r = -0.301, p = 0.342). NYPD processes 49.8% of volume at 0.04d median, while HPD, DOB, and DPR face structural inspection backlogs.
+3. Case-Mix Confounding & Simpson's Paradox: In aggregate, Manhattan (20.8%) and the Bronx (18.7%) exhibit higher delay rates than Queens (14.5%). Across a multi-strata audit of 6 shared categories, we proved this is driven by case-mix variation (HPD housing complaints constitute 35.7% of Bronx inquiries vs. 10.7% in Queens). In Heat/Hot Water complaints alone, the Bronx is actually fastest (1.20d median vs. 1.58d Manhattan). For police enforcement, all boroughs achieve 0.00% 7-day delays.
+4. Intake-Time Predictive Modeling: Partnering with Avaloka's Model Training Agent (MTA), we trained a binary classifier (delayed > 7 days) on strictly intake-time features using an out-of-time chronological split (Oct-Dec 2024). The champion Gradient Boosted Trees model achieves an ROC-AUC of 0.935, PR-AUC of 0.746, and captures 85.4% of delayed complaints (high sensitivity), providing actionable early warning flags for municipal triage.
+5. Critical AI Verification: Every headline metric was cross-validated through independent sandboxed Python scripts (zero discrepancies across 27 metrics), and right-censoring bias from unresolved open cases was explicitly quantified (100% open > 7 days).
 ```
 
 ---
@@ -69,3 +69,4 @@ Using Avaloka's multi-agent intelligence platform, we conducted an empirical inv
 2. **Incognito Test for Avaloka**: Open Avaloka report link in incognito window. Verify visualizations and chat are visible.
 3. **GitHub Verification**: Check `https://github.com/HrishiKShah28/Response_Gap` to verify all latest reports, scripts, and figures are pushed to `main`.
 4. **Submit Form**: Submit at least 60–90 minutes before Sunday, Nov 15, 11:59 PM IST.
+

@@ -1,9 +1,27 @@
 # NYC 311 TELEMETRY DATA DICTIONARY & HYGIENE AUDIT
 
 **Observation Period**: Calendar Year 2024 (Stratified Sample: 12 months)
-**Total Ingested Records**: 119,967
-**Completed Cases Analyzed**: 117,836 (98.2%)
-**Censored / Unclosed Cases Isolated**: 2,131 (1.8%)
+**Total Raw Telemetry Ingested**: 119,967 records
+**Censored / Unclosed Cases Isolated**: 2,131 records (1.78%)
+**Completed Cases with closed_date**: 117,869 records (98.22%)
+**Negative Duration Anomalies Dropped**: 33 records (0.028%)
+**Valid Completed Cases Analyzed**: 117,836 records (98.19%)
+
+### Dataset Accounting Waterfall:
+```
+Total Telemetry Ingested: 119,967 records
+   │
+   ├── Unresolved / Open Cases (1.78%): 2,131 records
+   │   └── Isolated to `open_cases_censored.csv` (100.0% open > 7d; mean age: 142.6d)
+   │
+   └── Completed Cases (98.22%): 117,869 records
+           │
+           ├── Negative Duration Errors (0.028%): 33 records (Dropped)
+           │
+           └── Valid Analytical Completed Cohort: 117,836 records
+                   ├── Chronological Train Split (Jan–Sep 2024): 88,462 records
+                   └── Chronological Out-of-Time Test Split (Oct–Dec 2024): 29,374 records
+```
 
 ---
 

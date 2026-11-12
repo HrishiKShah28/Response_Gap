@@ -26,29 +26,32 @@ Across a representative, 12-month stratified cohort of **115,000+ completed serv
 - The **median resolution time is 2.8 days** ($IQR = 0.3 \text{ to } 6.4 \text{ days}$), yet **19.4% of all complaints exceed 7 calendar days**, and **4.2% exceed 30 calendar days**.
 - Reporting arithmetic means in civic dashboards creates a misleading impression of agency performance.
 
-### 2. The Volume Paradox: Volume Does Not Drive Delay
-- High intake volume does *not* explain slow turnaround.
-- **NYPD** receives the single largest share of complaints (~42%) yet maintains one of the fastest median resolution times (**< 4 hours**), driven by localized mobile patrol dispatch and standard operating procedures.
-- Conversely, **HPD** (Housing Preservation & Development) and **DOB** (Buildings) handle lower volumes but face the largest median resolution times (**5.8 to 12.4 days**) and the highest 7-day delay rates (**38% to 62%**).
-- Spearman rank correlation between agency complaint volume and median resolution duration is **$r = -0.18$ ($p = 0.54$)**, empirically rejecting the hypothesis that high-volume agencies are structurally slower.
+### 2. Agency Volume vs. Turnaround Velocity
+- Agency-level complaint volume was **not significantly associated with median resolution time** in this observational sample (**Spearman $r = -0.301$, $p = 0.342$**; Pearson on log volume $r = -0.376$, $p = 0.228$).
+- **NYPD** receives the single largest share of complaints (49.8%) yet achieves the fastest median resolution time (**0.04 days / under 1 hour**), driven by localized mobile dispatch and rapid enforcement protocols.
+- Conversely, lower-volume agencies like **HPD** (Housing, median 3.47d, 36.7% delayed), **DOB** (Buildings, median 19.70d, 60.1% delayed), and **DPR** (Parks, median 25.35d, 64.0% delayed) exhibit prolonged durations governed by statutory inspection notice and cure requirements.
 
-### 3. Simpson's Paradox in Borough Equity
-- In aggregate data, the **Bronx** appears to suffer the longest delays, with a raw 7-day delay rate of **24.2%**, compared to **16.8% in Manhattan** and **18.1% in Queens**.
-- However, our adversarial follow-up revealed severe **Case-Mix Confounding**: HPD housing maintenance complaints make up over 48% of all Bronx complaints, compared to under 22% in Manhattan.
-- When controlling for complaint category (e.g., evaluating *Heat/Hot Water* complaints alone across all five boroughs), the borough delay rates converge to within **$\pm 2.1\%$**, confirming **Simpson's Paradox**. Apparent geographic disparities reflect differences in neighborhood housing stock and socioeconomic complaint types, not geographic favoritism by city agencies.
+### 3. Case-Mix Confounding & Simpson's Paradox in Borough Equity
+- In raw aggregate comparisons, **Manhattan (20.84%)** and the **Bronx (18.74%)** exhibit higher 7-day delay rates than Queens (14.50%) and Staten Island (16.42%).
+- However, our multi-strata audit across 6 core municipal categories proved this is driven by **Case-Mix Confounding**: HPD housing maintenance complaints make up **35.7% of all Bronx inquiries**, compared to only **10.7% in Queens**.
+- When evaluating *Heat/Hot Water* complaints ($N = 8,141$), a classic rank reversal occurs: the **Bronx achieves the fastest median turnaround (1.20 days)** compared to 1.58 days in Manhattan and 1.70 days in Brooklyn. For routine police enforcement (parking, noise, driveways), turnaround times uniformly converge to under 2 hours (0.00% 7-day delays) across all five boroughs.
 
-### 4. The Weekend Latency Penalty
-- Complaints submitted on Saturday or Sunday experience an immediate administrative delay ($OR = 1.34$, Fisher's exact $p < 10^{-10}$) compared to Tuesday/Wednesday submissions.
-- Because non-emergency municipal depots (DEP, DOB, DOT) operate on standard business hours, complaints logged over weekends accumulate 48 hours of initial latency before case triage begins.
+### 4. The Weekend Intake Phenomenon
+- Counter-intuitively, complaints filed on weekends exhibit a *lower* 7-day delay rate (12.55%) than weekdays (19.29%, $OR = 0.600$, $p = 7.02 \times 10^{-165}$).
+- This compositional shift occurs because weekend volume is heavily dominated by rapid NYPD quality-of-life enforcement (parties, street noise, blocked driveways) that swarms the queue and dilutes slower administrative cases.
 
 ### 5. Intake-Time Predictive Early Warning
-- Using Avaloka's **Model Training Agent (MTA)**, we trained a binary classifier to predict 7-day delays ($\text{delayed} > 7\text{d}$) using strictly intake-time features (agency, complaint type, descriptor, borough, ZIP code, channel, submission hour/day/month).
-- Evaluated on a strict **out-of-time chronological test set** (Oct–Dec 2024), the champion Gradient Boosted model achieves:
-  - **ROC-AUC**: **0.834**
-  - **PR-AUC**: **0.582** (vs. 0.194 baseline prevalence)
-  - **Recall on Delayed Cases**: **76.8%**
-  - **Overall Accuracy**: **81.4%**
-- Naive majority-class baselines achieve 80% accuracy by ignoring all delayed cases (0% recall). Our model provides actionable early warning, capturing over 3 out of every 4 delayed complaints at the exact moment of intake.
+- Collaborating with Avaloka's **Model Training Agent (MTA)**, we trained a binary classifier to predict 7-day delays using zero post-intake leakage.
+- Evaluated on a strict **out-of-time chronological test set** (Oct–Dec 2024, $N = 29,374$), the champion Gradient Boosted Trees model achieves:
+  - **ROC-AUC**: **0.935**
+  - **PR-AUC**: **0.746** (vs. 0.174 prevalence baseline)
+  - **Recall on Delayed Cases**: **85.4%** (capturing 4,361 out of 5,104 delayed cases)
+  - **Overall Accuracy**: **86.4%** (vs. 82.6% naive majority baseline)
+- Naive majority-class baselines achieve 82.6% accuracy by ignoring all delayed cases (0% recall). Our model provides actionable early warning, capturing >85% of delayed complaints at intake.
+
+### 6. Survivor / Right-Censoring Bias Audit
+- From 119,967 initially ingested records, exactly **2,131 records (1.78%)** were unresolved.
+- An auxiliary audit revealed that **100.0% of these open cases have been unresolved for $> 7$ days** (mean age: 142.6 days). Because this cohort was drawn from Calendar Year 2024 evaluated in early 2025 (minimum 60 days elapsed), surviving open tickets have necessarily languished, illustrating classical right-censoring in municipal completed-case metrics.
 
 ---
 
@@ -68,3 +71,4 @@ This project adhered strictly to an **Avaloka-First Methodology**:
 1. **Intake-Time Triage Flags**: Integrate the Avaloka-trained prediction model into the NYC 311 intake CRM. High-risk complaints ($p > 0.35$) should be immediately routed with an *"Early Delay Warning"* badge to agency dispatchers.
 2. **Dynamic Citizen SLA Expectations**: Replace static SLA estimates with dynamic, intake-modeled resolution ranges (e.g., *"Based on historical data for heating complaints in this building class, typical resolution is 5–9 days"*), managing expectations and reducing repeat calls.
 3. **Survivor Bias Transparency**: Municipal open data portals must publish elapsed duration metrics for open/pending tickets alongside completed-case statistics to prevent misleadingly optimistic performance claims.
+

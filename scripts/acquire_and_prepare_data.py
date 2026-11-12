@@ -322,3 +322,4 @@ if __name__ == "__main__":
     df_raw = fetch_monthly_sample()
     df_clean = clean_and_prepare(df_raw)
     print("\n=== Data Acquisition & Preparation Completed Successfully ===")
+
